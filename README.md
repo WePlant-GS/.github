@@ -33,6 +33,91 @@ Para executar o aplicativo em um ambiente de desenvolvimento, siga as instruçõ
 
 <br/>
 
+# <span style="color: #63C71F;">Endpoints </span>
+
+## Adicionar novo post
+Requisição: POST /posts/add/user/{id}
+
+ **Body:**
+ 
+    ```json
+    {
+    "username": "USERNAME_DO_USUARIO",
+    "password": "SENHA_DO_USUARIO"
+    }
+    ```
+    <br/>
+
+## Buscar post por ID
+
+Requisição: GET /posts/{id}
+Exemplo de uso: GET /posts/456
+
+    ``json
+    {
+      "id": 456,
+      "title": "Título do post",
+      "content": "Conteúdo do post"
+    }
+    ``` 
+ <br/>
+    
+## Buscar todos os comentários de um post
+
+Requisição: GET /posts/{id}/comments/all
+
+Exemplo de uso: GET /posts/789/comments/all?page=2&size=10
+
+    ``json
+            {
+          "content": [
+            {
+              "id": 1,
+              "postId": 789,
+              "text": "Comentário 1"
+            },
+            {
+              "id": 2,
+              "postId": 789,
+              "text": "Comentário 2"
+            }
+          ],
+          "page": 2,
+          "size": 10,
+          "totalElements": 20,
+          "totalPages": 2
+        }
+
+     ```
+ 
+  <br/>
+
+## Adicionar novo comentário a um post
+
+Requisição: POST /posts/{id}/comments/add
+
+``json
+{
+  "text": "Conteúdo do comentário"
+}
+``
+
+
+Exemplo de uso: POST /posts/789/comments/add
+Resposta: 204 No Content
+
+## Excluir post por ID
+
+Requisição: DELETE /posts/{id}/del
+Exemplo de uso: DELETE /posts/456/del
+Resposta: 204 No Content
+
+## Excluir comentário por ID
+
+Requisição: DELETE /posts/{id}/comments/{commentId}/del
+Exemplo de uso: DELETE /posts/789/comments/1/del
+Resposta: 204 No Content
+
 # <span style="color: #63C71F;">Equipe</span>
 
      A equipe responsável por esse projeto é composta por:
