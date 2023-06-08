@@ -26,10 +26,14 @@ O WePlant é um aplicativo voltado para auxiliar moradores de comunidades na pr�
 
 Para executar o aplicativo em um ambiente de desenvolvimento, siga as instruções abaixo conforme cada tecnologia:
 
--
--
--
--
+- Instalar o Doker desktop
+- Clonar o Projeto
+- Rodar o docker-compose que esta na raiz do projeto    
+   * docker-compose up -d
+- Rodar react-native expo
+          * npm install
+          * npm start
+
 
 <br/>
 
