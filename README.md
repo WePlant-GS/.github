@@ -35,88 +35,204 @@ Para executar o aplicativo em um ambiente de desenvolvimento, siga as instruçõ
 
 # <span style="color: #63C71F;">Endpoints </span>
 
-## Adicionar novo post
-Requisição: POST /posts/add/user/{id}
+Para um detalhamento completo dos endpoints feito pelo swagger, após a execução da aplicação, acesse a interface do swagger da aplicação pelo link : http://localhost:8080/swagger-ui/index.html#/.
 
- **Body:**
+## UserController
+
+### Método findById:
+Rota: "localhost:8080/users/{**user_id**}" <br>
+Descrição: Retorna um usuário com o ID especificado.
+
+### Método insert:
+Rota: "localhost:8080/users/add" <br>
+Descrição: Insere um novo usuário com base nos dados fornecidos.
+
+```js
+Request Body:
+
+{
+    "name" : "Tozé",
+    "birthday" : "02/02/2002",
+    "username" : "tozégamepray",
+    "email" : "tozégamepray@gmail",
+    "password" : "123456",
+    "address" : {
+        "CEP" : "55555-555",
+        "number": "123456",
+        "street": "Example Street",
+        "neighborhood": "Example Neighborhood",
+        "city": "Example City",
+        "state": "Example State",
+        "country": "Example Country"
+        },
+    "phone" : {
+        "ddd" : "123",
+        "ddi" : "123",
+        "number" : "123456789101"
+    }
+}
+
+
+```
+
+### Método update:
+Rota: "localhost:8080/users/updt/{**user_id**}" <br>
+Descrição: Atualiza um usuário existente com base nos dados fornecidos.
+
+```js
+Request body
+ Irá variar de acordo com as informações a se atualizar, ex. de endereço : 
  
-    ```json
-    {
-    "username": "USERNAME_DO_USUARIO",
-    "password": "SENHA_DO_USUARIO"
-    }
-    ```
-    <br/>
-
-## Buscar post por ID
-
-Requisição: GET /posts/{id}
-Exemplo de uso: GET /posts/456
-
-    ``json
-    {
-      "id": 456,
-      "title": "Título do post",
-      "content": "Conteúdo do post"
-    }
-    ``` 
- <br/>
-    
-## Buscar todos os comentários de um post
-
-Requisição: GET /posts/{id}/comments/all
-
-Exemplo de uso: GET /posts/789/comments/all?page=2&size=10
-
-    ``json
-            {
-          "content": [
-            {
-              "id": 1,
-              "postId": 789,
-              "text": "Comentário 1"
-            },
-            {
-              "id": 2,
-              "postId": 789,
-              "text": "Comentário 2"
-            }
-          ],
-          "page": 2,
-          "size": 10,
-          "totalElements": 20,
-          "totalPages": 2
+ "address" : {
+        "CEP" : "55555-555",
+        "number": "123456",
+        "street": "Example Street",
+        "neighborhood": "Example Neighborhood",
+        "city": "Example City",
+        "state": "Example State",
+        "country": "Example Country"
         }
 
-     ```
- 
-  <br/>
 
-## Adicionar novo comentário a um post
+```
 
-Requisição: POST /posts/{id}/comments/add
+### Método updateUserStatus:
+Rota: "localhost:8080/users/{**user_id**}" <br>
+Descrição: Atualiza o status de um usuário para "deletado".
 
-``json
+### Método addGarden:
+Rota: "localhost:8080/users/{**user_id**}/garden/add" <br>
+Descrição: Adiciona um novo jardim ao usuário com o ID especificado.
+
+``` js
 {
-  "text": "Conteúdo do comentário"
+  "name": "Exemplo de nome",
+  "status": "PLANTACAO",
+  "plant": "Exemplo de planta",
+  "type": "V"
 }
-``
+
+```
+
+### Método findGardenByUserID:
+Rota: "localhost:8080/users/{**user_id**}/gardens" <br>
+Descrição: Retorna uma lista de jardins pertencentes ao usuário com o ID especificado.
+
+### Método findAllUserPostsByUserId:
+Rota: "localhost:8080/users/{**user_id**}/posts" <br>
+Descrição: Retorna uma página paginada de postagens feitas pelo usuário com o ID especificado.
+
+### Método login:
+Rota: "localhost:8080/users/login" <br>
+Descrição: Realiza o login do usuário com base nas informações fornecidas.
+
+``` js
+{
+"username" : "name",
+"password" : "senha"
+}
+```
+
+## GardenController
+
+### Método findById:
+Rota: "localhost:8080/gardens/{**garden_id**}" <br>
+Descrição: Retorna um objeto GardenDTO com as informações do jardim encontrado.
+
+### Método deleteById:
+Rota: "localhost:8080/gardens/{**garden_id**}" <br>
+Descrição: Remove um jardim com o ID especificado.
+
+### Método update:
+Rota: "localhost:8080/gardens/{**garden_id**}" <br>
+Descrição: Atualiza um jardim existente com base nos dados fornecidos.
+
+``` js
+{
+   "status" : "CRESCIMENTO"
+}
+
+```
+
+### Método insertNote:
+Rota: "localhost:8080/gardens/{**garden_id**}/notes/add" <br>
+Descrição: Insere uma nova nota para o jardim com o ID especificado.
+
+``` js
+  {
+      "body" : "Plantação com resultados. Colher em duas seman.
+  }
+```
+
+### Método deleteNote:
+Rota: "localhost:8080/gardens/notes/{**note_id**}" <br>
+Descrição: Remove uma nota com o ID especificado.
+
+### Método updateNote:
+Rota: "localhost:8080/gardens/notes/{**note_id**}" <br>
+Descrição: Atualiza uma nota existente com base nos dados fornecidos.
 
 
-Exemplo de uso: POST /posts/789/comments/add
-Resposta: 204 No Content
+``` js
+  {
+      "body" : "Plantação com resultados. Colher em duas semanas.
+  }
+```
 
-## Excluir post por ID
+### Método findAllNotes:
+Rota: "localhost:8080/gardens/{**garden_id**}/notes" <br>
+Descrição: Retorna uma lista de objetos NoteDTO com as informações das notas encontradas.
 
-Requisição: DELETE /posts/{id}/del
-Exemplo de uso: DELETE /posts/456/del
-Resposta: 204 No Content
+### Método findNoteById:
+Rota: "localhost:8080/gardens/notes/{**note_id**}" <br>
+Descrição: Retorna um objeto NoteDTO com as informações da nota encontrada.
 
-## Excluir comentário por ID
 
-Requisição: DELETE /posts/{id}/comments/{commentId}/del
-Exemplo de uso: DELETE /posts/789/comments/1/del
-Resposta: 204 No Content
+## PostController
+
+#### Método insert:
+Rota: "localhost:8080/posts/add/user/{**user_id**}"
+Descrição: Insere um novo post com base nos dados fornecidos e no ID do usuário especificado.
+
+
+``` js
+  {
+     {
+  "description": "Descrição do post",
+  "date": "2023-06-07",
+  "userName": "Nome do usuário",
+  "username": "Nome de usuário"
+}
+  }
+```
+
+### Método findById:
+Rota: "localhost:8080/posts/{**post_id**}"
+Descrição: Retorna um objeto PostReducedDTO com as informações do post encontrado.
+
+### Método findAllCommentsByPostId:
+Rota: "localhost:8080/posts/{**post_id**}/comments/all"
+Descrição: Retorna uma página paginada de objetos CommentDTO com os comentários do post com o ID especificado.
+
+### Método addNewComment:
+Rota: "localhost:8080/posts/{**post_id**}/comments/add"
+Descrição: Adiciona um novo comentário ao post com o ID especificado, com base nos dados fornecidos.
+
+
+``` js
+  {
+      "userId" : 1,
+      "body" : "Que plantação top!"
+  }
+```
+
+### Método deleteById:
+Rota: "localhost:8080/posts/{**post_id**}/del"
+Descrição: Remove um post com o ID especificado.
+
+### Método deleteCommentById:
+Rota: "localhost:8080/posts/{**post_id**}/comments/{**comment_Id**}/del"
+Descrição: Remove um comentário com o ID especificado, pertencente ao post com o ID especificado.
 
 # <span style="color: #63C71F;">Equipe</span>
 
