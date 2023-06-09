@@ -4,6 +4,11 @@ O WePlant √© um aplicativo voltado para auxiliar moradores de comunidades na pr√
 
 <br/>
 
+# <span style="color: #63C71F;">Pitch</span>
+
+[Assista ao video Pitch](https://youtu.be/0_QOPCaIbMc)
+
+
 # <span style="color: #63C71F;">Tecnologias Utilizadas</span>
 
           
